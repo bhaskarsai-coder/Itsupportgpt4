@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue Resolution</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .output {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .output h3 {
+            margin-top: 0;
+        }
+        .solution {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .solution p {
+            margin: 5px 0;
+        }
+        .solution p.title {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Issue Resolution System</h1>
+    <form action="/get_solutions/" method="post">
+        <label for="issue">Issue Description:</label><br>
+        <input type="text" id="issue" name="issue" required><br><br>
+        <input type="submit" value="Get Solutions">
+    </form>
+
+    {% if solutions %}
+    <div class="output">
+        <h3>Resolved Issue: {{ issue }}</h3>
+        
+        {% if solutions['Solution 1 (Excel)'] %}
+        <div class="solution">
+            <p class="title">Solution 1 (Excel):</p>
+            {% for solution in solutions['Solution 1 (Excel)'] %}
+                <p>{{ solution }}</p>
+            {% endfor %}
+        </div>
+        {% else %}
+            <p>No solution found in Excel.</p>
+        {% endif %}
+        
+        <div class="solution">
+            <p class="title">Solution 2 (PDF):</p>
+            <p>{{ solutions['Solution 2 (PDF)'] if solutions['Solution 2 (PDF)'] else 'No solution found in PDF.' }}</p>
+        </div>
+
+        <div class="solution">
+            <p class="title">Solution 3 (GPT-4):</p>
+            <p>{{ solutions['Solution 3 (GPT-4)'] }}</p>
+        </div>
+    </div>
+    {% endif %}
+</body>
+</html>
