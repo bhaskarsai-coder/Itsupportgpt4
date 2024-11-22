@@ -1,4 +1,4 @@
-flask 
-pandas
-pdfplumber
-openai
+Flask==2.3.2
+pandas==2.1.1
+pdfplumber==0.9.0
+openai==0.28.1
